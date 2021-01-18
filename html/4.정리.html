@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<script src="../js/lodash.min.js"></script>
+</head>
+<body>
+	<form action="" onsubmit="return hap(this);">
+		<input type="text" name="a">
+		<input type="text" name="b">
+		<textarea name="memo" cols="30" rows="10"></textarea>
+		<button>더하기</button>
+	</form>
+	<script>
+		function hap(f) {
+			console.log(Number.parseInt(f.a.value) + Number.parseInt(f.b.value));
+			console.log(Number(f.a.value) + Number(f.b.value));
+			var arr = f.memo.value.split('');
+			var html = arr.map(function(v) {
+				return v.charCodeAt(0) === 10 ? '<br>': v;
+			});
+			document.querySelector('body').innerHTML += html.join('');
+			
+			return false;
+		}
+
+		console.log( 0/0 );
+		const arr9 = [1, 10, -100, -10, 1000, 0];
+		console.log( Math.min(1, 10, -100, -10, 1000, 0) ); // ES5
+		console.log( Math.min(...arr9) ); //ES6
+		console.log( _.min(arr9) ); // Lodash 
+
+		// 1 ~ 10
+		// Math.random() // 0 ~ 0.9999999999
+		// console.log(Math.ceil(Math.random() * 11) - 1) // 0 ~ 9.9999 // 0 ~ 10
+
+		console.log(_.random(1, 10));
+
+		console.log(Math.abs(-10)); // 10
+
+		var str = "나의 이름은 \"홍길동\" 입니다. "; // 문자열 안에서 따옴표 사용하고 싶을때는 역슬래쉬!!!!!
+		console.log(str);
+
+		const arr10 = ['A', 'B', 'C'];
+		let html  = '<ul>';
+		html += '<li>'+arr10[0]+'</li>';
+		html += '<li>'+arr10[1]+'</li>';
+		html += '<li>'+arr10[2]+'</li>';
+		html += '</ul>';
+
+		// template string - ES6
+		let html2 = ` 
+			<ul>
+				<li class="">${arr10[0]}</li>
+				<li class=''>${arr10[1]}</li>
+				<li>${arr10[2]}</li>
+			</ul>
+		`; //빽틱
+		console.log(html2);
+
+
+		var user = [ //이렇게 user데이터가 있는데,
+			{name: '홍길동', age: 22},
+			{name: '홍길순', age: 12},
+			{name: '홍용만', age: 42},
+			{name: '홍삼룡', age: 32},
+			{name: '홍길이', age: 28},
+		]; // 회원중에 홍길을 가진 사람을 찾으시오 할때,
+
+		// 1. 홍길 ?  indexOf (인덱스오브) 중요!!!! 문자열에서 위치 찾기 ( 괄호 안의 물어보는 값이 있으면 인덱스값을 추출해준다.)
+		var hongkil = user.filter(function(v) {
+			return v.name.indexOf('홍길') > -1; //-1 	보다 크다면 리턴
+		});
+		console.log(hongkil); // 못찾을땐 -1을 반환해준다.
+
+		//문자열 추출 (  slice,  substring,  substr  )
+		var date = '2021-01-15 13:13:50';
+		var day = date.slice(8, 10); //위 날짜 중 15일을 가져와라니깐 8번째부터 10번째 전까지 인덱스를 가져와.
+		console.log(day);
+		var day = date.substring(11);// <- 11번째 뒤에 있는 모든 애들 가져와.
+		console.log(day);
+		var day = date.substr(8, 2); //시작하는 인덱스 8번째의, (갯수)2자리수 가져와라
+		console.log(day);
+
+		// split 도 중요!!!!!!! (배열로 만들어주는 애)
+		var cart = '1211001,2,xl,B'; // 예)쇼핑몰 -> 날짜,갯수,사이즈,색상
+		var carts = cart.split(','); // return Array
+		console.log(carts);
+		//replace 도 자주 쓰임
+		var str = _.replace("자바 스크립트(자바) 입니다.", /자바/gi, 'css');
+		console.log(str); // 로대쉬의 리플레이스
+		var str = "자바 스크립트(자바) 입니다.".replace(/자바/gi, 'css');
+		console.log(str); // 자바스크립트의 리플레이스
+		// str.replace( "#" , "" );  -> # 을 공백으로 변경하는데 첫번째 #만 변경해주고 나머지는 변경이 되지 않기때문에.
+		// # 을 감싼 따옴표를 슬래시로 대체하고 뒤에 gi를 붙이면 replaceAll과 같은 결과.
+	
+		// [정규식의 gi 설명]
+		// g : 발생할 모든 pattern 에 대한 전역 검색 (즉 글로벌의 뜻)
+		// i : 대/소문자 구분 안함
+		// 그리고 슬러쉬를 붙이면 정규표현식을 쓴다는 뜻.
+
+		// ES6에서 추가된 검색
+		var str = 'booldook hi~';
+		console.log( str.includes('hi') );		// true // 'booldook hi~'; 이 문자열 안에  'hi' 가 포함되어 있으면 트루
+		console.log( str.startsWith('boo') );	// true  // 시작이 boo로 시작하면 트루 (bo 트루 / boo 트루 / booo 폴스)
+		console.log( str.endsWith('hi~') );		// true // 끝이 hi~로 끝나니? 맞으면 트루
+
+		console.clear(); // 이전의 콘솔들 지워주는거? 
+		var number = [], lotto = [];
+		for(var i=1; i<46; i++) number.push(i); // 1~45 까지의 숫자가 넘버 배열 안에 푸쉬 됨
+		var shuffle = _.shuffle(number); // shuffle 배열을 섞어 주는거
+		for(var i=0; i<6; i++) lotto.push(shuffle.pop()); // 섞인 배열을 포문으로 6번 돌리고 셔플로 섞어서 팝으로 빼낸다. 그리고 로또 배열 안에 푸쉬로 넣어준다.
+		console.log(lotto); // 이렇게 찍어보면 6개의 랜덤 번호가 추출되어 찍힌다. 
+
+		var shuffle = _.shuffle(number);
+		console.log(shuffle.sort(function(a, b){return a - b})); // sort 의 오름차순 정렬
+		console.log(shuffle.sort(function(a, b){return b - a})); // sort 의 내림차순 정렬
+		console.log(_.sortBy(shuffle)); // 내림차순
+
+//splice  :  배열 요소를 제거하거나 추가, 즉 중간에서 넣고 뺄수 있음(푸쉬,팝,쉬프트,언쉬프트랑 한세트)
+		var arr11 = ['a', 'b', 'c', 'd'];
+		var drop = arr11.splice(2, 1); //2번 인덱스 자리에서 하나를 빼라 ('c' 추출)
+		console.log(drop, arr11);
+
+		// join : 배열을 문자열로 바꾸는 거 
+		var telArr = ['010', 8332, 8040];
+		console.log(telArr.join('-')); 
+   // slice : 원본 배열을 손상하지 않고 추출하는거.
+		var arr = [1, true, "JavaScript", "자바스크립트"];
+		var newArr = arr.slice(1, 3);
+		console.log([...arr, ...newArr]);// 굳이 콘캣을 안쓰고 배열 두개를 붙여 주는거
+
+		// entries
+		var entries = Object.entries([1, true, "TCPSchool"]);
+		console.log(entries);
+		
+		var entries = Object.entries({x:5, y:10});
+		console.log(entries);
+
+		for(let [k, v] of entries) {
+			console.log(k, v);
+		}
+	</script>
+</body>
+</html>
+<!-- 
+* Array Method
+ * push() // 맨 뒤에 요소 추가
+ * pop() // 맨 뒤에서 요소 추출
+ * shift() // 맨 앞에 요소 추가
+ * unshift() // 맨 앞에서 요소 추출
+ * sort() // 문자열 오름차순으로 정렬 (콜백함수로 숫자의 오름차순, 내림차순을 할 수 있다.)
+ */ -->

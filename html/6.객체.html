@@ -1,0 +1,34 @@
+<script>
+  /*********** ES6 중점사항 ************/
+  // 1. let, const - 중복선언을 막아준다. (되도록이면 var 대신 let을 써라.)
+  // 2. const fn = () => {} // 애로우 펑션
+  // 3. 구조분해할당(비 구조화 할당)
+  // 4. rest operator, spread operator => ...
+  // 5. String => includes, startsWith, EndsWith
+  // 6. Set, Map
+  // 7. Class
+
+  // 3. 구조분해할당 (복습)
+  const obj = {
+    a: 'A',
+    b: 'B',
+    fn: function() {
+       console.log('hi');
+    }
+  }
+let { a, fn } = obj;
+let [ a1, , b1 ] = arr;
+console.log(a1, b1);
+
+// 4. 나머지 연산자
+const fn2 = () => {
+   let str = '';
+   for(let i in arguments) {
+      str += arguments[i] + ' / ';
+   }
+}
+const arr2 = ['A', 'B', 'C'];
+
+
+
+</script>
